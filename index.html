@@ -325,6 +325,10 @@ body.tab-hidden *{animation-play-state:paused!important}
 .anim-select:active{transform:scale(.96)}
 .anim-card.selected .anim-select{background:var(--red);border-color:var(--red);box-shadow:0 8px 20px rgba(225,6,0,.35)}
 .anim-note{color:var(--muted);font-size:13.5px;margin-top:22px;text-align:center}
+.anim-custom{margin-top:22px;background:linear-gradient(150deg,rgba(225,6,0,.16),var(--card) 60%);border:1px solid rgba(225,6,0,.45);border-radius:22px;padding:28px 22px;text-align:center}
+.anim-custom h3{font-size:clamp(21px,5vw,28px);font-weight:900;text-transform:uppercase}
+.anim-custom p{color:var(--muted);max-width:56ch;margin:10px auto 20px}
+.anim-custom .anim-price-note{display:block;margin-top:12px;font-size:13px;font-weight:700;color:var(--red2)}
 /* Sticky order bar */
 #animBar{position:fixed;left:0;right:0;bottom:0;z-index:70;display:none;background:rgba(10,10,13,.95);backdrop-filter:blur(10px);border-top:1px solid rgba(225,6,0,.4);padding:10px 12px calc(10px + env(safe-area-inset-bottom))}
 body.on-anim #animBar{display:block}
@@ -719,6 +723,14 @@ body.modal-open{overflow:hidden}
           <div class="anim-body"><h3>3D Swinging Badge</h3><p>A swinging 3D ID badge with a waving ribbon in your hero — the signature WebNova look.</p>
           <div class="anim-foot"><span class="anim-price">+ $5<small>one-time add-on</small></span><button class="anim-select" type="button">Select</button></div></div>
         </article>
+      </div>
+
+      <div class="anim-custom reveal">
+        <p class="kicker">Your Idea, Your Animation</p>
+        <h3>Want a Custom Animation?</h3>
+        <p>You can get a custom animation made exactly the way you imagine it — built around your own idea, your style and your demand. Tell us what you have in mind and we will bring it to life on your website.</p>
+        <a class="btn btn-red wa-link" href="https://wa.me/8801866339688?text=Hi%20WebNova!%20I%20want%20a%20custom%20animation%20made%20from%20my%20own%20idea.%20Please%20share%20details." data-msg="Hi WebNova! I want a custom animation made from my own idea. Please share details."><span class="btn-label">Request Custom Animation ✦</span><span class="burst"><i></i><i></i><i></i><i></i><i></i><i></i></span></a>
+        <span class="anim-price-note">Price depends on your idea and demand — confirmed on WhatsApp before any work starts.</span>
       </div>
 
       <p class="anim-note">Add-on prices are added on top of your chosen package (Basic $49 · Standard $99 · Premium $199). Your final quote is confirmed on WhatsApp before any work starts — no hidden charges.</p>
