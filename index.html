@@ -1,0 +1,1188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="dark" />
+<link rel="icon" href="data:," />
+<title>WebNova — Websites that move.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#08080a; --bg2:#0e0e11; --card:#141418; --card2:#1a1a20;
+  --line:rgba(255,255,255,.09); --text:#f5f5f7; --muted:#a1a1aa;
+  --red:#e10600; --red2:#ff2e1f; --green:#25d366; --green-d:#128c4a;
+  --radius:18px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;line-height:1.55;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
+h1,h2,h3,.display{font-family:Archivo,Inter,system-ui,sans-serif;letter-spacing:-.02em;line-height:1.02;margin:0}
+a{color:inherit}
+img{max-width:100%}
+.wrap{width:min(1180px,100% - 32px);margin:0 auto}
+section{padding:72px 0}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease;transition-delay:var(--d,0s)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}*{animation-duration:.01ms!important;animation-iteration-count:1!important}}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:50;background:rgba(8,8,10,.86);backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:Archivo,sans-serif;font-weight:900;font-size:22px;letter-spacing:-.03em}
+.logo-mark{width:34px;height:34px;border-radius:9px;background:var(--red);display:grid;place-items:center;font-size:18px;color:#fff;box-shadow:0 8px 24px rgba(225,6,0,.45)}
+.logo span em{font-style:normal;color:var(--red2)}
+.nav-links{display:none;gap:26px;font-size:14px;font-weight:600;color:var(--muted)}
+.nav-links a{text-decoration:none;padding:10px 2px}
+.nav-links a:hover{color:#fff}
+@media(min-width:760px){.nav-links{display:flex}}
+.btn{position:relative;overflow:visible;display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;cursor:pointer;text-decoration:none;font-weight:700;font-size:15px;padding:14px 22px;border-radius:999px;min-height:48px;transition:transform .15s ease,box-shadow .2s ease}
+.btn:active{transform:scale(.97)}
+.btn-red{background:var(--red);color:#fff;box-shadow:0 10px 28px rgba(225,6,0,.35)}
+.btn-ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.22)}
+.btn-wa{background:var(--green);color:#062b16;box-shadow:0 10px 28px rgba(37,211,102,.28)}
+.btn-sm{padding:10px 18px;min-height:44px;font-size:14px}
+.burst{position:absolute;inset:0;pointer-events:none}
+.burst i{position:absolute;left:50%;top:50%;width:8px;height:8px;border-radius:50%;background:#fff;opacity:0}
+.btn.bursting .burst i{animation:pop .55s ease-out forwards}
+.btn.bursting .burst i:nth-child(1){--a:0deg}.btn.bursting .burst i:nth-child(2){--a:60deg}
+.btn.bursting .burst i:nth-child(3){--a:120deg}.btn.bursting .burst i:nth-child(4){--a:180deg}
+.btn.bursting .burst i:nth-child(5){--a:240deg}.btn.bursting .burst i:nth-child(6){--a:300deg}
+@keyframes pop{0%{opacity:1;transform:translate(-50%,-50%) rotate(var(--a)) translateY(0) scale(1)}100%{opacity:0;transform:translate(-50%,-50%) rotate(var(--a)) translateY(-46px) scale(.4)}}
+.btn.bursting::after{content:"";position:absolute;inset:-4px;border-radius:999px;border:2px solid rgba(255,255,255,.7);animation:ring .55s ease-out forwards;pointer-events:none}
+@keyframes ring{from{opacity:1;transform:scale(.95)}to{opacity:0;transform:scale(1.18)}}
+
+/* HERO */
+.hero{position:relative;padding:56px 0 110px;overflow:hidden;background:radial-gradient(700px 380px at 85% -10%,rgba(225,6,0,.22),transparent 60%),radial-gradient(600px 400px at -10% 30%,rgba(255,46,31,.08),transparent 60%),var(--bg)}
+.hero-grid{display:grid;gap:44px;align-items:center;position:relative;z-index:1}
+@media(min-width:920px){.hero-grid{grid-template-columns:1.15fr .85fr}}
+.pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:rgba(255,255,255,.04);padding:8px 14px;border-radius:999px;font-size:13px;font-weight:600;color:#d4d4d8}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(37,211,102,.6);animation:pulse 1.8s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 9px rgba(37,211,102,0)}100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}}
+.hero h1{font-size:clamp(44px,11vw,84px);font-weight:900;text-transform:uppercase;margin:18px 0 16px}
+.hero h1 .stroke{color:transparent;-webkit-text-stroke:1.5px #fff}
+.hero h1 .red{color:var(--red2)}
+.hero p.lead{font-size:17px;color:var(--muted);max-width:52ch;margin:0 0 26px}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:26px;font-size:13.5px;color:var(--muted);font-weight:600}
+.hero-meta b{color:#fff}
+
+/* Badge swing */
+.badge-stage{display:flex;justify-content:center;perspective:900px;padding-top:6px}
+.swing{transform-origin:50% -40px;animation:swing 4.2s ease-in-out infinite}
+@keyframes swing{0%,100%{transform:rotate(8deg)}50%{transform:rotate(-8deg)}}
+.lanyard{width:6px;height:74px;margin:0 auto;background:repeating-linear-gradient(180deg,#2a2a30 0 10px,#1c1c21 10px 20px);border-radius:3px;position:relative}
+.lanyard::after{content:"";position:absolute;left:50%;bottom:-12px;transform:translateX(-50%);width:26px;height:16px;border:2px solid #3f3f46;border-bottom:0;border-radius:8px 8px 0 0}
+.badge{width:min(290px,78vw);background:linear-gradient(160deg,#1c1c22,#101014);border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:18px;box-shadow:0 30px 60px rgba(0,0,0,.55);transform:rotateX(4deg)}
+.badge-top{display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:.14em;font-weight:800;color:var(--muted);text-transform:uppercase}
+.badge-top i{width:34px;height:10px;border-radius:99px;background:var(--red);display:block}
+.badge-avatar{width:74px;height:74px;border-radius:16px;background:linear-gradient(135deg,var(--red),#7a0300);display:grid;place-items:center;font-family:Archivo,sans-serif;font-weight:900;font-size:30px;color:#fff;margin:16px 0 12px}
+.badge h3{font-size:24px;font-weight:900}
+.badge p{margin:4px 0 0;color:var(--muted);font-size:13.5px}
+.badge-bar{margin-top:16px;height:8px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden}
+.badge-bar i{display:block;height:100%;width:72%;background:linear-gradient(90deg,var(--red),var(--red2));border-radius:99px;animation:bar 2.6s ease-in-out infinite alternate}
+@keyframes bar{from{width:58%}to{width:86%}}
+.ribbon{position:absolute;left:-8%;right:-8%;bottom:14px;top:auto;height:40px;background:linear-gradient(90deg,#8f0400,var(--red) 30%,var(--red2) 50%,var(--red) 70%,#8f0400);transform:rotate(-2deg);animation:ribbonWave 5.5s ease-in-out infinite;display:flex;align-items:center;overflow:hidden;opacity:.95;pointer-events:none;z-index:0}
+.ribbon span{white-space:nowrap;font-family:Archivo,sans-serif;font-weight:800;letter-spacing:.12em;font-size:13px;text-transform:uppercase;color:#fff;animation:ribbonMove 14s linear infinite;padding-right:24px}
+@keyframes ribbonMove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* MARQUEE */
+.marquee{border-block:1px solid var(--line);background:var(--bg2);overflow:hidden;padding:16px 0}
+.marquee-track{display:flex;width:max-content;animation:marq 22s linear infinite;gap:0}
+.marquee-track span{font-family:Archivo,sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:.06em;font-size:15px;padding:0 18px;white-space:nowrap;color:#e4e4e7}
+.marquee-track span b{color:var(--red2);font-weight:800}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+/* SECTION HEADS */
+.kicker{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--red2);margin:0 0 10px}
+.sec-head h2{font-size:clamp(30px,6vw,46px);font-weight:900;text-transform:uppercase}
+.sec-head p{color:var(--muted);max-width:60ch;margin:10px 0 0}
+
+/* WORK */
+.work-grid{display:grid;gap:16px;margin-top:28px}
+@media(min-width:700px){.work-grid{grid-template-columns:1fr 1fr}}
+.work-card{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--card);transform-style:preserve-3d;transition:transform .25s ease,border-color .25s ease;will-change:transform}
+.work-card:hover{border-color:rgba(255,255,255,.22)}
+.mock{height:190px;position:relative;overflow:hidden;padding:16px}
+.mock .bar{display:flex;gap:6px;margin-bottom:12px}
+.mock .bar i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.35)}
+.mock h4{font-family:Archivo,sans-serif;font-size:22px;font-weight:900;line-height:1.05;margin:0;max-width:10ch}
+.mock p{font-size:12.5px;opacity:.85;margin:6px 0 0;max-width:26ch}
+.mock .chip{position:absolute;right:14px;bottom:14px;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.25);padding:6px 10px;border-radius:999px;font-size:11px;font-weight:700}
+.m1{background:linear-gradient(135deg,#3b0a06,#e10600 55%,#ff7a1a)}
+.m2{background:linear-gradient(135deg,#171221,#5b2ea6 55%,#e879c6)}
+.m3{background:linear-gradient(135deg,#0b1526,#0ea5a4 55%,#67e8f9);color:#06202a}.m3 h4,.m3 p{color:#04222b}
+.m4{background:linear-gradient(135deg,#0a1f14,#16a34a 55%,#facc15);color:#0b2413}.m4 h4,.m4 p{color:#0b2413}
+.work-body{padding:16px 18px 18px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.work-body h3{font-size:17px;font-weight:800}
+.work-body p{margin:4px 0 0;color:var(--muted);font-size:13.5px}
+.tag{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--red2);white-space:nowrap;padding-top:4px}
+
+/* 360 VIEWER */
+.viewer-sec{background:var(--bg2);border-block:1px solid var(--line)}
+.stage360{margin-top:28px;border:1px solid var(--line);border-radius:22px;background:radial-gradient(500px 260px at 50% 0%,rgba(225,6,0,.14),transparent 65%),#0b0b0e;padding:28px 16px 20px;overflow:hidden}
+.stage-label{text-align:center;font-weight:700;font-size:14px;color:#e4e4e7}
+.stage-label span{color:var(--muted);font-weight:500}
+.scene{perspective:1100px;display:flex;justify-content:center;padding:34px 0 10px;touch-action:pan-y}
+.device{position:relative;width:280px;height:190px;transform-style:preserve-3d;cursor:grab;user-select:none;-webkit-user-select:none}
+.device:active{cursor:grabbing}
+.face{position:absolute;inset:0;border-radius:16px;border:1px solid rgba(255,255,255,.16);backface-visibility:hidden;overflow:hidden;padding:14px}
+.face h4{font-family:Archivo,sans-serif;font-size:19px;font-weight:900;margin:0;line-height:1.1}
+.face p{font-size:12px;margin:6px 0 0;opacity:.9;max-width:24ch}
+.face .mini-btn{display:inline-block;margin-top:10px;background:#fff;color:#111;font-size:11px;font-weight:800;padding:7px 12px;border-radius:999px}
+.f-front{background:linear-gradient(150deg,#1e1e26,#101014)}
+.f-right{background:linear-gradient(150deg,#3b0a06,#e10600)}
+.f-back{background:linear-gradient(150deg,#0b1526,#155e75)}
+.f-left{background:linear-gradient(150deg,#14240f,#3f6212)}
+.face small{position:absolute;bottom:12px;left:14px;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;opacity:.75}
+.hint{text-align:center;color:var(--muted);font-size:13px;margin-top:8px}
+.dots{display:flex;justify-content:center;gap:7px;margin-top:12px}
+.dots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.25)}
+.dots i.on{background:var(--red2);transform:scale(1.25)}
+
+/* PROCESS */
+.steps{display:grid;gap:14px;margin-top:28px}
+@media(min-width:860px){.steps{grid-template-columns:repeat(4,1fr)}}
+.step{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+.step .num{font-family:Archivo,sans-serif;font-weight:900;font-size:34px;color:transparent;-webkit-text-stroke:1.2px var(--red2)}
+.step h3{font-size:16.5px;font-weight:800;margin:10px 0 6px}
+.step p{margin:0;color:var(--muted);font-size:14px}
+.timeline{margin-top:16px;background:#0b0b0e;border:1px solid var(--line);border-radius:12px;padding:12px}
+.timeline .tl-bar{height:6px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden;margin-bottom:10px}
+.timeline .tl-bar i{display:block;height:100%;width:64%;background:linear-gradient(90deg,var(--red),var(--red2))}
+.timeline .clips{display:flex;gap:6px}
+.timeline .clips i{flex:1;height:22px;border-radius:6px;background:var(--card2);border:1px solid var(--line)}
+.timeline .clips i:nth-child(2){background:rgba(225,6,0,.35)}
+
+/* PRICING */
+.price-grid{display:grid;gap:16px;margin-top:28px}
+@media(min-width:860px){.price-grid{grid-template-columns:repeat(3,1fr)}}
+.price{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:24px;display:flex;flex-direction:column}
+.price.pop{border-color:var(--red);background:linear-gradient(180deg,rgba(225,6,0,.10),var(--card) 55%);position:relative}
+.pop-badge{position:absolute;top:-12px;left:20px;background:var(--red);color:#fff;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:6px 10px;border-radius:999px}
+.price h3{font-size:18px;font-weight:800}
+.price .amount{font-family:Archivo,sans-serif;font-size:38px;font-weight:900;margin:10px 0 2px}
+.price .amount small{font-size:13px;font-family:Inter,sans-serif;font-weight:600;color:var(--muted)}
+.price ul{list-style:none;padding:0;margin:16px 0 22px;display:grid;gap:10px;font-size:14px;color:#d4d4d8}
+.price li{display:flex;gap:9px;align-items:flex-start}
+.price li::before{content:"✓";color:var(--green);font-weight:900}
+.price .btn{margin-top:auto;width:100%}
+
+/* FAQ */
+.faq{margin-top:24px;display:grid;gap:10px}
+details{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:4px 18px}
+summary{cursor:pointer;font-weight:700;font-size:15.5px;padding:14px 0;min-height:48px;display:flex;align-items:center;list-style:none}
+summary::-webkit-details-marker{display:none}
+details p{color:var(--muted);margin:0 0 16px;font-size:14.5px}
+
+/* CONTACT */
+.contact-card{margin-top:8px;background:linear-gradient(150deg,#1b0503,#0e0e11 55%);border:1px solid rgba(225,6,0,.35);border-radius:24px;padding:30px 22px;text-align:center;overflow:hidden;position:relative}
+.contact-card h2{font-size:clamp(30px,7vw,50px);font-weight:900;text-transform:uppercase}
+.contact-card p{color:var(--muted);max-width:52ch;margin:12px auto 22px}
+.phone-big{display:block;font-family:Archivo,sans-serif;font-weight:900;font-size:clamp(22px,6vw,32px);text-decoration:none;margin:18px 0 4px;letter-spacing:.01em}
+.contact-card small{color:var(--muted)}
+footer{border-top:1px solid var(--line);padding:28px 0 96px;color:var(--muted);font-size:13.5px}
+.foot-in{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center}
+
+/* FLOATING WA */
+.float-wa{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:60;width:60px;height:60px;border-radius:50%;background:var(--green);display:grid;place-items:center;text-decoration:none;box-shadow:0 14px 34px rgba(0,0,0,.5);animation:floatPulse 2s infinite}
+.float-wa svg{width:30px;height:30px;fill:#062b16}
+@keyframes floatPulse{0%{box-shadow:0 14px 34px rgba(0,0,0,.5),0 0 0 0 rgba(37,211,102,.5)}70%{box-shadow:0 14px 34px rgba(0,0,0,.5),0 0 0 14px rgba(37,211,102,0)}100%{box-shadow:0 14px 34px rgba(0,0,0,.5),0 0 0 0 rgba(37,211,102,0)}}
+.float-wa.bursting{animation:waPop .55s ease}
+@keyframes waPop{30%{transform:scale(1.18) rotate(6deg)}60%{transform:scale(.94)}}
+
+/* ===== ANIMATION UPGRADES ===== */
+/* Scroll progress */
+#progress{position:fixed;top:0;left:0;right:0;height:3px;z-index:95;background:linear-gradient(90deg,var(--red),var(--red2),#ff7a1a);transform:scaleX(0);transform-origin:0 50%}
+/* Hero shimmer headline */
+.hero h1 .shine{background:linear-gradient(100deg,#fff 35%,#ffe3de 48%,#fff 62%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 6s ease-in-out infinite}
+.hero h1 .red{background:linear-gradient(100deg,var(--red2) 35%,#ffc4bc 48%,var(--red2) 62%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 6s ease-in-out infinite}
+@keyframes shimmer{0%{background-position:130% 0}55%,100%{background-position:-130% 0}}
+/* Hero glow orbs */
+.orb{position:absolute;border-radius:50%;pointer-events:none;z-index:0;will-change:transform}
+.orb i{display:block;width:100%;height:100%;border-radius:50%;animation:drift 9s ease-in-out infinite alternate}
+.orb1{width:300px;height:300px;top:-100px;right:-80px}
+.orb1 i{background:radial-gradient(circle,rgba(255,46,31,.32),rgba(225,6,0,.10) 55%,transparent 70%)}
+.orb2{width:230px;height:230px;bottom:4%;left:-90px}
+.orb2 i{background:radial-gradient(circle,rgba(37,211,102,.18),transparent 65%);animation-duration:11s}
+.orb3{width:150px;height:150px;top:40%;right:10%}
+.orb3 i{background:radial-gradient(circle,rgba(255,122,26,.20),transparent 65%);animation-duration:13s}
+@keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(16px,22px) scale(1.07)}}
+@keyframes ribbonWave{0%,100%{transform:rotate(-2.4deg) translateY(0)}50%{transform:rotate(-1.5deg) translateY(3px)}}
+/* Touch spotlight cards */
+.spot{position:relative}
+.spot::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .35s ease;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(255,90,70,.17),rgba(255,255,255,.05) 45%,transparent 70%);z-index:3}
+.spot.spot-on::after{opacity:1}
+.price{transition:transform .3s ease,border-color .25s ease,opacity .5s ease;transform-style:preserve-3d}
+/* WhatsApp confetti */
+.confetti-box{position:absolute;inset:0;pointer-events:none;z-index:6}
+.confetti{position:absolute;left:50%;top:50%;width:7px;height:11px;border-radius:2px;opacity:0}
+.confetti.fly{animation:confettiFly .75s cubic-bezier(.15,.6,.4,1) forwards}
+@keyframes confettiFly{0%{opacity:1;transform:translate(-50%,-50%) rotate(0deg) scale(1)}100%{opacity:0;transform:translate(calc(-50% + var(--tx,0px)),calc(-50% + var(--ty,0px))) rotate(var(--rot,180deg)) scale(.65)}}
+/* Live build demo */
+.demo-sec{background:var(--bg2);border-block:1px solid var(--line)}
+.demo-grid{display:grid;gap:16px;margin-top:28px}
+@media(min-width:900px){.demo-grid{grid-template-columns:1fr 1fr}}
+.win{border:1px solid var(--line);border-radius:16px;background:#0b0b0e;overflow:hidden;display:flex;flex-direction:column}
+.win-bar{display:flex;align-items:center;gap:6px;padding:11px 14px;border-bottom:1px solid var(--line);background:#101014}
+.win-bar i{width:10px;height:10px;border-radius:50%;background:#3f3f46;flex:none}
+.win-bar i:nth-child(1){background:#ff5f57}.win-bar i:nth-child(2){background:#febc2e}.win-bar i:nth-child(3){background:#28c840}
+.win-bar span{margin-left:8px;font-size:12px;color:var(--muted);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.code-body{padding:16px 16px 10px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;line-height:1.95;min-height:252px;counter-reset:ln;flex:1}
+.code-line{min-height:1.95em;white-space:pre-wrap;word-break:break-word}
+.code-line::before{counter-increment:ln;content:counter(ln);display:inline-block;width:18px;margin-right:8px;color:#52525b;text-align:right}
+.code-line.tk{color:#ff9d8f}
+.code-line.cs{color:#4ade80}
+.code-line.ok{color:var(--green);font-weight:700}
+.cursor{display:inline-block;width:8px;height:14px;background:var(--red2);vertical-align:-2px;margin-left:2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.demo-status{margin:0;padding:0 16px 14px;font-size:12.5px;color:var(--muted);font-weight:600}
+.demo-status b{color:var(--green)}
+.pv-body{padding:18px;min-height:252px;background:#101014;position:relative;transition:background .7s ease;flex:1}
+.pv-body.themed{background:linear-gradient(160deg,#260a08,#101014 62%)}
+.pv-step{opacity:0;transform:translateY(12px) scale(.97);transition:opacity .45s ease,transform .45s ease}
+.pv-step.show{opacity:1;transform:none}
+.pv-header{display:flex;justify-content:space-between;align-items:center;background:#1c1c22;border:1px solid var(--line);border-radius:10px;padding:9px 12px;font-weight:800;font-size:13px}
+.pv-nav{display:flex;gap:5px}
+.pv-nav i{width:15px;height:5px;border-radius:99px;background:rgba(255,255,255,.25)}
+.pv-hero{font-family:Archivo,sans-serif;font-weight:900;font-size:25px;line-height:1.08;margin:16px 0 0}
+.pv-hero em{font-style:normal;transition:color .5s ease}
+.themed .pv-hero em{color:var(--red2)}
+.pv-sub{color:var(--muted);font-size:13px;margin:8px 0 0}
+.pv-btn{display:inline-block;margin-top:14px;background:#3f3f46;color:#fff;font-weight:700;font-size:13px;padding:10px 16px;border-radius:999px;transition:background .6s ease,color .6s ease,box-shadow .6s ease}
+.themed .pv-btn{background:var(--green);color:#062b16;box-shadow:0 10px 24px rgba(37,211,102,.35)}
+.pv-cards{display:flex;gap:8px;margin-top:16px}
+.pv-cards i{flex:1;height:52px;border-radius:10px;background:#1b1b21;border:1px solid var(--line);transition:background .6s ease}
+.themed .pv-cards i:nth-child(1){background:linear-gradient(135deg,#e10600,#ff7a1a)}
+.themed .pv-cards i:nth-child(2){background:linear-gradient(135deg,#5b2ea6,#e879c6)}
+.themed .pv-cards i:nth-child(3){background:linear-gradient(135deg,#0ea5a4,#67e8f9)}
+.pv-live{position:absolute;top:12px;right:12px;background:var(--green);color:#062b16;font-size:10.5px;font-weight:800;letter-spacing:.08em;padding:5px 10px;border-radius:999px;opacity:0;transform:scale(.5);transition:opacity .35s ease,transform .45s cubic-bezier(.2,1.6,.4,1);z-index:2}
+.pv-live.show{opacity:1;transform:scale(1)}
+/* Count-up stats */
+.stats-sec{padding:44px 0}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(min-width:860px){.stats-grid{grid-template-columns:repeat(4,1fr)}}
+.stat{text-align:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 10px}
+.stat .big{font-family:Archivo,sans-serif;font-size:clamp(30px,7vw,42px);font-weight:900;line-height:1}
+.stat .big em{font-style:normal;color:var(--red2)}
+.stat p{margin:6px 0 0;color:var(--muted);font-size:13px;font-weight:600}
+/* Before / After slider */
+.ba{position:relative;margin-top:28px;border:1px solid var(--line);border-radius:20px;overflow:hidden;height:330px;--pos:50%;touch-action:pan-y;user-select:none;-webkit-user-select:none;background:#0b0b0e}
+.ba-layer{position:absolute;inset:0;padding:20px;overflow:hidden}
+.ba-webnova{background:linear-gradient(150deg,#230a07,#101014 60%)}
+.ba-ordinary{background:#a9a9ae;clip-path:inset(0 calc(100% - var(--pos)) 0 0);z-index:2}
+.ba-tag{position:absolute;top:12px;font-size:10.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;padding:6px 10px;border-radius:999px;z-index:3;white-space:nowrap}
+.ba-ordinary .ba-tag{left:12px;background:rgba(0,0,0,.45);color:#e4e4e7}
+.ba-webnova .ba-tag{right:12px;background:var(--red);color:#fff}
+.ba-handle{position:absolute;top:0;bottom:0;left:var(--pos);width:2px;margin-left:-1px;background:#fff;z-index:5;box-shadow:0 0 16px rgba(255,46,31,.75)}
+.ba-grip{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:52px;height:52px;border-radius:50%;background:var(--red);border:2px solid #fff;display:grid;place-items:center;color:#fff;box-shadow:0 0 0 6px rgba(225,6,0,.28),0 12px 26px rgba(0,0,0,.5);cursor:ew-resize}
+.ba-grip svg{width:26px;height:26px}
+.ba-hint{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);background:rgba(0,0,0,.68);color:#fff;font-size:12px;font-weight:700;padding:8px 14px;border-radius:999px;z-index:6;pointer-events:none;animation:hintPulse 1.6s ease-in-out infinite;transition:opacity .35s;white-space:nowrap}
+.ba.touched .ba-hint{opacity:0}
+@keyframes hintPulse{0%,100%{transform:translateX(-50%) scale(1)}50%{transform:translateX(-50%) scale(1.08)}}
+.ord-box{background:#c6c6ca;border:1px solid #8e8e93;border-radius:4px;padding:16px;margin-top:26px;color:#26262b;font-family:Georgia,'Times New Roman',serif;max-width:430px}
+.ord-box h4{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:21px;margin:0 0 8px;letter-spacing:0;text-transform:none;line-height:1.25}
+.ord-line{height:8px;background:#8e8e93;border-radius:2px;margin:7px 0}
+.ord-btn{display:inline-block;margin-top:10px;background:#8e8e93;color:#26262b;font-size:13px;padding:7px 14px;border:1px solid #6d6d72;border-radius:3px}
+.nova-box{margin-top:26px;max-width:430px}
+.nova-box h4{font-family:Archivo,sans-serif;font-size:clamp(24px,6vw,32px);font-weight:900;line-height:1.05;margin:0;text-transform:uppercase}
+.nova-box h4 em{font-style:normal;color:var(--red2)}
+.nova-box p{color:var(--muted);font-size:13px;margin:10px 0 0;max-width:34ch}
+.nova-btn{display:inline-block;margin-top:14px;background:var(--green);color:#062b16;font-weight:800;font-size:13px;padding:10px 16px;border-radius:999px;box-shadow:0 10px 24px rgba(37,211,102,.3)}
+.nova-chips{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
+.nova-chips i{width:64px;height:40px;border-radius:9px}
+.nova-chips i:nth-child(1){background:linear-gradient(135deg,#e10600,#ff7a1a)}
+.nova-chips i:nth-child(2){background:linear-gradient(135deg,#5b2ea6,#e879c6)}
+.nova-chips i:nth-child(3){background:linear-gradient(135deg,#0ea5a4,#67e8f9)}
+
+/* ===== ANIMATIONS PICKER PAGE ===== */
+#page-anim{display:none}
+body.on-anim #page-home{display:none}
+body.on-anim #page-anim{display:block}
+body.on-anim .float-wa{display:none}
+body.tab-hidden *{animation-play-state:paused!important}
+.anim-sec{padding:34px 0 130px}
+.back-btn{margin-bottom:6px}
+.anim-cta{margin:6px auto 0;text-align:center;background:linear-gradient(150deg,rgba(225,6,0,.14),var(--card) 60%);border:1px solid rgba(225,6,0,.35);border-radius:22px;padding:30px 20px}
+.anim-cta h3{font-size:clamp(22px,5vw,30px);font-weight:900;text-transform:uppercase}
+.anim-cta p{color:var(--muted);max-width:52ch;margin:10px auto 20px}
+.anim-grid{display:grid;gap:16px;margin-top:28px}
+@media(min-width:640px){.anim-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:1020px){.anim-grid{grid-template-columns:repeat(3,1fr)}}
+.anim-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:border-color .25s ease,box-shadow .25s ease}
+.anim-card.selected{border-color:var(--red);box-shadow:0 0 0 1px var(--red),0 14px 34px rgba(225,6,0,.22)}
+.anim-demo{height:158px;position:relative;overflow:hidden;display:grid;place-items:center;background:#0b0b0e}
+.anim-card.demo-off .anim-demo *{animation-play-state:paused!important}
+.anim-body{padding:16px 18px 18px}
+.anim-body h3{font-size:16.5px;font-weight:800}
+.anim-body p{margin:5px 0 0;color:var(--muted);font-size:13.5px;min-height:40px}
+.anim-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px}
+.anim-price{font-family:Archivo,sans-serif;font-weight:900;font-size:19px;color:#fff}
+.anim-price small{display:block;font-family:Inter,sans-serif;font-weight:600;font-size:11px;color:var(--muted)}
+.anim-select{border:1px solid rgba(255,255,255,.25);background:transparent;color:#fff;font-weight:700;font-size:14px;padding:11px 18px;border-radius:999px;cursor:pointer;min-height:46px;min-width:118px;transition:background .2s ease,border-color .2s ease,transform .12s ease;font-family:Inter,sans-serif}
+.anim-select:active{transform:scale(.96)}
+.anim-card.selected .anim-select{background:var(--red);border-color:var(--red);box-shadow:0 8px 20px rgba(225,6,0,.35)}
+.anim-note{color:var(--muted);font-size:13.5px;margin-top:22px;text-align:center}
+/* Sticky order bar */
+#animBar{position:fixed;left:0;right:0;bottom:0;z-index:70;display:none;background:rgba(10,10,13,.95);backdrop-filter:blur(10px);border-top:1px solid rgba(225,6,0,.4);padding:10px 12px calc(10px + env(safe-area-inset-bottom))}
+body.on-anim #animBar{display:block}
+.animbar-in{max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.animbar-txt{font-size:13px;color:var(--muted);line-height:1.35;min-width:0}
+.animbar-txt b{color:#fff}
+.animbar-txt .animbar-total{display:block;font-family:Archivo,sans-serif;font-size:19px;font-weight:900;color:#fff}
+.animbar-txt .animbar-total em{font-style:normal;color:var(--red2)}
+#animBar .btn{flex:none}
+/* Demo 1 — hero entrance */
+.d-hero{background:radial-gradient(300px 150px at 50% 0%,rgba(225,6,0,.25),transparent 70%),#0b0b0e;text-align:center;padding:14px}
+.dh-title{font-family:Archivo,sans-serif;font-weight:900;font-size:21px;line-height:1.1;animation:heroLoop 3.6s ease-in-out infinite}
+.dh-title em{font-style:normal;color:var(--red2)}
+.dh-line{width:110px;height:7px;border-radius:99px;background:rgba(255,255,255,.22);margin:10px auto 0;animation:heroLoop 3.6s .18s ease-in-out infinite}
+.dh-btn{display:inline-block;margin-top:12px;background:var(--green);color:#062b16;font-weight:800;font-size:12px;padding:8px 15px;border-radius:999px;animation:heroLoop 3.6s .36s ease-in-out infinite}
+@keyframes heroLoop{0%{opacity:0;transform:translateY(16px)}16%,76%{opacity:1;transform:none}92%,100%{opacity:0;transform:translateY(-8px)}}
+/* Demo 2 — scroll reveal */
+.d-reveal{background:linear-gradient(160deg,#12121a,#0b0b0e);padding:18px;display:block}
+.dr-row{display:flex;align-items:center;gap:10px;background:#1a1a21;border:1px solid var(--line);border-radius:10px;padding:9px 12px;margin-bottom:9px;animation:revealLoop 4.2s ease-in-out infinite}
+.dr-row i{width:26px;height:26px;border-radius:8px;flex:none}
+.dr-row span{height:8px;border-radius:99px;background:rgba(255,255,255,.28)}
+.dr-row:nth-child(1) i{background:linear-gradient(135deg,#e10600,#ff7a1a)}
+.dr-row:nth-child(2){animation-delay:.45s}.dr-row:nth-child(2) i{background:linear-gradient(135deg,#5b2ea6,#e879c6)}
+.dr-row:nth-child(3){animation-delay:.9s;margin-bottom:0}.dr-row:nth-child(3) i{background:linear-gradient(135deg,#0ea5a4,#67e8f9)}
+@keyframes revealLoop{0%{opacity:0;transform:translateY(18px)}18%,78%{opacity:1;transform:none}94%,100%{opacity:0;transform:translateY(6px)}}
+/* Demo 3 — 3D tilt cards */
+.d-tilt{background:radial-gradient(280px 140px at 50% 110%,rgba(225,6,0,.22),transparent 70%),#0b0b0e;perspective:600px}
+.dt-card{width:150px;height:96px;border-radius:14px;background:linear-gradient(150deg,#26262e,#141419);border:1px solid rgba(255,255,255,.2);padding:12px;animation:tiltLoop 4.4s ease-in-out infinite;box-shadow:0 18px 34px rgba(0,0,0,.5)}
+.dt-card b{font-family:Archivo,sans-serif;font-size:14px;display:block}
+.dt-card i{display:block;height:7px;border-radius:99px;background:rgba(255,255,255,.25);margin-top:9px}
+.dt-card i:last-child{width:55%;background:var(--red2)}
+@keyframes tiltLoop{0%,100%{transform:rotateY(-17deg) rotateX(7deg)}50%{transform:rotateY(17deg) rotateX(-5deg)}}
+/* Demo 4 — 360 viewer */
+.d-360{background:radial-gradient(280px 140px at 50% 0%,rgba(14,165,164,.18),transparent 70%),#0b0b0e;perspective:650px}
+.d3-box{position:relative;width:132px;height:88px;transform-style:preserve-3d;animation:spinY 6s linear infinite}
+.d3-face{position:absolute;inset:0;border-radius:12px;border:1px solid rgba(255,255,255,.25);display:grid;place-items:center;font-family:Archivo,sans-serif;font-weight:900;font-size:13px;backface-visibility:hidden;padding:8px;text-align:center}
+.d3-f{background:linear-gradient(150deg,#3b0a06,#e10600)}
+.d3-b{background:linear-gradient(150deg,#0b1526,#155e75);transform:rotateY(180deg)}
+@keyframes spinY{from{transform:rotateY(0)}to{transform:rotateY(360deg)}}
+/* Demo 5 — live build */
+.d-build{background:#0b0b0e;padding:16px 18px;display:block;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11.5px;line-height:2}
+.db-line{white-space:nowrap;overflow:hidden;color:#ff9d8f;width:0;animation:typeLoop 5.2s steps(24) infinite}
+.db-line.c2{color:#a5b4fc;animation-delay:.7s}
+.db-line.c3{color:#4ade80;animation-delay:1.4s}
+@keyframes typeLoop{0%{width:0}38%,82%{width:23ch}96%,100%{width:0}}
+.db-live{display:inline-block;margin-top:8px;background:var(--green);color:#062b16;font-family:Inter,sans-serif;font-size:10.5px;font-weight:800;letter-spacing:.06em;padding:5px 10px;border-radius:999px;animation:liveLoop 5.2s ease-in-out infinite}
+@keyframes liveLoop{0%,55%{opacity:0;transform:scale(.6)}68%,88%{opacity:1;transform:scale(1)}100%{opacity:0}}
+/* Demo 6 — before/after */
+.d-ba{background:#101014;display:block}
+.dba-base{position:absolute;inset:0;background:linear-gradient(150deg,#230a07,#17171c);padding:16px}
+.dba-base b,.dba-top b{font-family:Archivo,sans-serif;font-size:15px;font-weight:900;display:block}
+.dba-base b em{font-style:normal;color:var(--red2)}
+.dba-top{position:absolute;inset:0;background:#a9a9ae;padding:16px;color:#26262b;animation:baLoop 4.2s ease-in-out infinite alternate}
+.dba-top b{font-family:Georgia,'Times New Roman',serif;font-weight:400}
+.dba-top i{display:block;height:7px;background:#8e8e93;border-radius:2px;margin-top:9px}
+.dba-handle{position:absolute;top:0;bottom:0;width:2px;background:#fff;box-shadow:0 0 12px rgba(255,46,31,.8);animation:baHandle 4.2s ease-in-out infinite alternate;z-index:2}
+.dba-handle::after{content:"⟷";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:34px;height:34px;border-radius:50%;background:var(--red);border:2px solid #fff;color:#fff;display:grid;place-items:center;font-size:15px}
+@keyframes baLoop{from{clip-path:inset(0 76% 0 0)}to{clip-path:inset(0 10% 0 0)}}
+@keyframes baHandle{from{left:24%}to{left:90%}}
+/* Demo 7 — particles & confetti */
+.d-parts{background:radial-gradient(260px 140px at 50% 50%,rgba(37,211,102,.14),transparent 70%),#0b0b0e}
+.dp-btn{position:relative;background:var(--red);color:#fff;font-weight:800;font-size:13px;padding:11px 18px;border-radius:999px;box-shadow:0 10px 24px rgba(225,6,0,.4)}
+.dp-btn i{position:absolute;left:50%;top:50%;width:7px;height:10px;border-radius:2px;opacity:0;animation:partLoop 2.3s ease-out infinite}
+.dp-btn i:nth-child(1){--a:0deg;background:#25d366}.dp-btn i:nth-child(2){--a:45deg;background:#ffd166;animation-delay:.12s}
+.dp-btn i:nth-child(3){--a:90deg;background:#fff;animation-delay:.24s}.dp-btn i:nth-child(4){--a:135deg;background:#ff2e1f;animation-delay:.36s}
+.dp-btn i:nth-child(5){--a:180deg;background:#25d366;animation-delay:.48s}.dp-btn i:nth-child(6){--a:225deg;background:#ffd166;animation-delay:.6s}
+.dp-btn i:nth-child(7){--a:270deg;background:#fff;animation-delay:.72s}.dp-btn i:nth-child(8){--a:315deg;background:#ff2e1f;animation-delay:.84s}
+@keyframes partLoop{0%{opacity:0;transform:translate(-50%,-50%) rotate(var(--a)) translateY(0) scale(1)}22%{opacity:1}68%,100%{opacity:0;transform:translate(-50%,-50%) rotate(var(--a)) translateY(-54px) scale(.55)}}
+/* Demo 8 — swinging badge */
+.d-badge{background:radial-gradient(280px 150px at 50% -10%,rgba(225,6,0,.2),transparent 70%),#0b0b0e;align-items:start;padding-top:0}
+.mini-swing{transform-origin:50% -30px}
+.mini-lanyard{width:5px;height:44px;margin:0 auto;background:repeating-linear-gradient(180deg,#2a2a30 0 8px,#1c1c21 8px 16px);border-radius:3px}
+.mini-badge{width:104px;background:linear-gradient(160deg,#1c1c22,#101014);border:1px solid rgba(255,255,255,.16);border-radius:13px;padding:10px;text-align:center;box-shadow:0 16px 30px rgba(0,0,0,.5)}
+.mini-badge .mb-av{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,var(--red),#7a0300);display:grid;place-items:center;font-family:Archivo,sans-serif;font-weight:900;font-size:14px;color:#fff;margin:0 auto 6px}
+.mini-badge b{font-family:Archivo,sans-serif;font-size:12px;display:block}
+.mini-badge span{font-size:10px;color:var(--muted)}
+/* ===== WORK CARD MODAL + LIVE PILLS ===== */
+.work-card{cursor:pointer}
+.face .mini-btn{position:relative;cursor:pointer}
+.modal-overlay{position:fixed;inset:0;z-index:90;background:rgba(4,4,6,.8);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:16px}
+.modal-overlay.open{display:flex}
+.modal{position:relative;width:min(520px,100%);max-height:92vh;overflow:auto;background:var(--card);border:1px solid rgba(255,255,255,.16);border-radius:22px;box-shadow:0 30px 70px rgba(0,0,0,.6);animation:modalIn .3s ease}
+@keyframes modalIn{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}
+.modal-mock{height:230px}
+.modal-x{position:absolute;top:10px;right:10px;z-index:5;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(0,0,0,.6);color:#fff;font-size:17px;font-weight:700;cursor:pointer;display:grid;place-items:center}
+.modal-x:active{transform:scale(.94)}
+.modal-body{padding:20px 22px 24px}
+.modal-body h3{font-size:22px;font-weight:900;margin:6px 0 8px}
+.modal-body .modal-desc{color:var(--muted);margin:0;font-size:14.5px}
+.modal-price{margin:14px 0 0;color:#fff;font-weight:600;font-size:15px}
+.modal-price b{color:var(--red2)}
+.modal-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.modal-actions .btn{flex:1 1 160px}
+body.modal-open{overflow:hidden}
+</style>
+</head>
+<body>
+<div id="progress" aria-hidden="true"></div>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="#top"><span class="logo-mark">N</span><span>Web<em>Nova</em></span></a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="#build">Live Build</a><a href="#work">Work</a><a href="#" data-goto="anim">Animations</a><a href="#compare">Before / After</a><a href="#view360">360° View</a><a href="#process">Process</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a>
+    </nav>
+    <a class="btn btn-red btn-sm wa-link" href="https://wa.me/8801866339688?text=Hi%20WebNova!%20I%20want%20a%20website.%20Please%20share%20details." data-msg="Hi WebNova! I want a website. Please share details."><span class="btn-label">Order Now</span><span class="burst"><i></i><i></i><i></i><i></i><i></i><i></i></span></a>
+  </div>
+</header>
+
+<div id="page-home">
+<main id="top">
+  <!-- HERO -->
+  <div class="hero">
+    <div class="orb orb1" data-depth="0.10" aria-hidden="true"><i></i></div>
+    <div class="orb orb2" data-depth="0.18" aria-hidden="true"><i></i></div>
+    <div class="orb orb3" data-depth="0.06" aria-hidden="true"><i></i></div>
+    <div class="ribbon" aria-hidden="true"><span>Websites that move • Mobile-first • Animated • Fast delivery •&nbsp;</span><span>Websites that move • Mobile-first • Animated • Fast delivery •&nbsp;</span></div>
+    <div class="wrap hero-grid">
+      <div class="reveal in">
+        <span class="pill"><span class="dot"></span> Available for new orders</span>
+        <h1><span class="shine">Websites</span><br><span class="stroke">That</span> <span class="red">Move.</span></h1>
+        <p class="lead">WebNova builds bold, animated websites for shops, creators and businesses — designed on mobile first, alive with motion, and live on a link that works 24/7. No domain needed to start.</p>
+        <div class="hero-cta">
+          <a class="btn btn-wa wa-link" href="https://wa.me/8801866339688?text=Hi%20WebNova!%20I%20want%20a%20website.%20Please%20share%20details." data-msg="Hi WebNova! I want a website. Please share details.">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.2 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.4-.7-2.9-1.2-4.7-4.1-4.9-4.3-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.5c-.1.1-.3.3-.1.6.1.3.7 1.2 1.6 1.9 1.1.9 2 1.2 2.3 1.3.3.1.5.1.6-.1l1-1.2c.2-.3.4-.2.7-.1l2.1 1c.3.2.5.3.6.4 0 .1 0 .7-.2 1.2z"/></svg>
+            <span class="btn-label">Order on WhatsApp</span><span class="burst"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+          </a>
+          <a class="btn btn-ghost" href="#pricing">See Pricing</a>
+          <a class="btn btn-ghost" href="#" data-goto="anim" style="border-color:rgba(255,46,31,.55)">Browse Animations ✦</a>
+        </div>
+        <div class="hero-meta">
+          <span><b>Mobile-first</b> design</span><span><b>Full motion</b> &amp; 3D feel</span><span><b>Live 24/7</b> — no domain needed</span>
+        </div>
+      </div>
+      <div class="badge-stage reveal in" aria-hidden="true">
+        <div class="swing">
+          <div class="lanyard"></div>
+          <div class="badge">
+            <div class="badge-top"><span>WebNova Studio</span><i></i></div>
+            <div class="badge-avatar">WN</div>
+            <h3>Your Brand Here</h3>
+            <p>Animated websites, built to sell — restaurant, shop, portfolio &amp; more.</p>
+            <div class="badge-bar"><i></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MARQUEE -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track" id="marqueeTrack">
+      <span>Business Websites <b>✦</b></span><span>Online Stores <b>✦</b></span><span>Restaurant Sites <b>✦</b></span><span>Portfolios <b>✦</b></span><span>Landing Pages <b>✦</b></span><span>Booking Pages <b>✦</b></span>
+    </div>
+  </div>
+
+  <!-- LIVE BUILD DEMO -->
+  <section id="build" class="demo-sec">
+    <div class="wrap">
+      <div class="sec-head reveal"><p class="kicker">Live Build Demo</p><h2>Watch a website build itself</h2><p>This is not a video — real code types itself on the left while the website appears on the right, step by step. This is how your site comes to life.</p></div>
+      <div class="demo-grid">
+        <div class="win reveal">
+          <div class="win-bar"><i></i><i></i><i></i><span>index.html — WebNova builder</span></div>
+          <div class="code-body" id="codeBody" aria-hidden="true"></div>
+          <p class="demo-status" id="demoStatus">Building your site…</p>
+        </div>
+        <div class="win reveal">
+          <div class="win-bar"><i></i><i></i><i></i><span>yourshop — live preview</span></div>
+          <div class="pv-body" id="pvBody">
+            <span class="pv-live" id="pvLive">● LIVE</span>
+            <div class="pv-step pv-header" data-fx="header"><span>Your Shop</span><span class="pv-nav"><i></i><i></i><i></i></span></div>
+            <h4 class="pv-step pv-hero" data-fx="hero">Fresh <em>Styles</em>,<br>Every Week</h4>
+            <p class="pv-step pv-sub" data-fx="sub">Delivered all over Bangladesh — order in one tap.</p>
+            <span class="pv-step pv-btn" data-fx="btn">Order on WhatsApp</span>
+            <div class="pv-step pv-cards" data-fx="cards"><i></i><i></i><i></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats-sec">
+    <div class="wrap">
+      <div class="stats-grid">
+        <div class="stat reveal"><div class="big"><span class="count" data-count="360">0</span><em>°</em></div><p>Spin-around view of your site</p></div>
+        <div class="stat reveal"><div class="big"><span class="count" data-count="100">0</span><em>%</em></div><p>Mobile-friendly, always</p></div>
+        <div class="stat reveal"><div class="big"><span class="count" data-count="3">0</span></div><p>Packages to pick from</p></div>
+        <div class="stat reveal"><div class="big"><span class="count" data-count="24">0</span><em>/7</em></div><p>Online — day and night</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section id="work">
+    <div class="wrap">
+      <div class="sec-head reveal"><p class="kicker">Selected Work</p><h2>Pick a style. We build yours.</h2><p>Sample looks to show the range. Your site gets your name, your photos and your colours. Tap a card — it tilts in 3D.</p></div>
+      <div class="work-grid">
+        <article class="work-card tilt spot reveal"><div class="mock m1"><div class="bar"><i></i><i></i><i></i></div><h4>Taste the Heat</h4><p>Menu, offers and one-tap WhatsApp ordering.</p><span class="chip">Order Online</span></div><div class="work-body"><div><h3>Spice Route — Restaurant</h3><p>Menu pages, daily offers, table booking button.</p></div><span class="tag">Restaurant</span></div></article>
+        <article class="work-card tilt spot reveal"><div class="mock m2"><div class="bar"><i></i><i></i><i></i></div><h4>New Drop Friday</h4><p>Lookbook, product grid and checkout-ready layout.</p><span class="chip">Shop Now</span></div><div class="work-body"><div><h3>Vogue Lane — Fashion Store</h3><p>Product showcase with bold animated banners.</p></div><span class="tag">Fashion</span></div></article>
+        <article class="work-card tilt spot reveal"><div class="mock m3"><div class="bar"><i></i><i></i><i></i></div><h4>Work That Speaks</h4><p>Gallery, services and a big contact card.</p><span class="chip">Hire Me</span></div><div class="work-body"><div><h3>Creator Portfolio</h3><p>For editors, designers and freelancers.</p></div><span class="tag">Portfolio</span></div></article>
+        <article class="work-card tilt spot reveal"><div class="mock m4"><div class="bar"><i></i><i></i><i></i></div><h4>Go Somewhere New</h4><p>Tour packages, photo stories and booking form.</p><span class="chip">Book a Trip</span></div><div class="work-body"><div><h3>Wander BD — Travel</h3><p>Packages, galleries and easy enquiry flow.</p></div><span class="tag">Travel</span></div></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANIMATIONS CTA -->
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="anim-cta reveal">
+        <p class="kicker">Make It Move</p>
+        <h3>Pick your animations</h3>
+        <p>See every animation playing live, tap the ones you love, and watch your price build up — then order in one tap on WhatsApp.</p>
+        <a class="btn btn-red" href="#" data-goto="anim">Browse Animations ✦<span class="burst"><i></i><i></i><i></i><i></i><i></i><i></i></span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEFORE / AFTER -->
+  <section id="compare">
+    <div class="wrap">
+      <div class="sec-head reveal"><p class="kicker">Before / After</p><h2>Ordinary vs WebNova</h2><p>Same business — two very different websites. Drag the handle and feel the difference your customers will feel.</p></div>
+      <div class="ba reveal" id="ba">
+        <div class="ba-layer ba-webnova">
+          <span class="ba-tag">WebNova website</span>
+          <div class="nova-box">
+            <h4>Fresh Styles.<br><em>Bold Prices.</em></h4>
+            <p>Animated, mobile-first and built to sell — with WhatsApp ordering on every page.</p>
+            <span class="nova-btn">Order on WhatsApp</span>
+            <div class="nova-chips"><i></i><i></i><i></i></div>
+          </div>
+        </div>
+        <div class="ba-layer ba-ordinary">
+          <span class="ba-tag">Ordinary website</span>
+          <div class="ord-box">
+            <h4>Welcome to My Website</h4>
+            <div class="ord-line" style="width:92%"></div>
+            <div class="ord-line" style="width:78%"></div>
+            <div class="ord-line" style="width:85%"></div>
+            <span class="ord-btn">Click Here</span>
+          </div>
+        </div>
+        <div class="ba-handle"><span class="ba-grip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 7 4 12l4.5 5M15.5 7 20 12l-4.5 5"/></svg></span></div>
+        <span class="ba-hint">Drag me</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 360 VIEWER -->
+  <section id="view360" class="viewer-sec">
+    <div class="wrap">
+      <div class="sec-head reveal"><p class="kicker">360° Showcase</p><h2>See it from every angle</h2><p>This is a live preview device built right on the page. Spin it around to check the front, sides and back — just like your customers will explore your site.</p></div>
+      <div class="stage360 reveal">
+        <p class="stage-label">Drag to spin — <span>360° view</span></p>
+        <div class="scene" id="scene">
+          <div class="device" id="device" role="img" aria-label="Interactive 360 degree website preview. Drag to rotate.">
+            <div class="face f-front"><h4>Your Homepage</h4><p>Big headline, motion and a clear order button.</p><span class="mini-btn wa-link" data-msg="Hi WebNova! I want a website. Please share details.">Order Now</span><small>Front — Home</small></div>
+            <div class="face f-right"><h4>Your Shop</h4><p>Products laid out clean, ready to sell.</p><span class="mini-btn" data-goto-section="work">View Products</span><small>Side — Store</small></div>
+            <div class="face f-back"><h4>About &amp; Story</h4><p>Your brand story, told with style.</p><span class="mini-btn" data-goto-section="process">Our Story</span><small>Back — About</small></div>
+            <div class="face f-left"><h4>Contact in 1 Tap</h4><p>WhatsApp button on every page. No missed customers.</p><span class="mini-btn wa-link" data-msg="Hi WebNova! I want a website. Please share details.">Chat Now</span><small>Side — Contact</small></div>
+          </div>
+        </div>
+        <p class="hint">👆 Drag left or right — it keeps spinning with momentum, then slowly turns on its own.</p>
+        <div class="dots" id="dots"><i class="on"></i><i></i><i></i><i></i></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process">
+    <div class="wrap">
+      <div class="sec-head reveal"><p class="kicker">How It Works</p><h2>From idea to live in 4 steps</h2></div>
+      <div class="steps">
+        <div class="step reveal"><div class="num">01</div><h3>Share your idea</h3><p>Message on WhatsApp with your business name, what you sell, and any site you like the look of.</p></div>
+        <div class="step reveal"><div class="num">02</div><h3>Design &amp; motion</h3><p>We design your pages with animation and a 3D feel — built mobile-first, so it shines on phones.</p><div class="timeline" aria-hidden="true"><div class="tl-bar"><i></i></div><div class="clips"><i></i><i></i><i></i><i></i></div></div></div>
+        <div class="step reveal"><div class="num">03</div><h3>Review on your phone</h3><p>You get a private preview link. Open it on your phone, check everything, ask for changes.</p></div>
+        <div class="step reveal"><div class="num">04</div><h3>Launch + handover</h3><p>After payment, your site goes live 24/7 and the files or account access are handed over to you.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" style="padding-top:8px">
+    <div class="wrap">
+      <div class="sec-head reveal"><p class="kicker">Pricing</p><h2>Simple prices, in USD</h2><p>Final price depends on pages and features — confirmed on WhatsApp before any work starts. No hidden charges.</p></div>
+      <div class="price-grid">
+        <div class="price tilt spot reveal"><h3>Basic</h3><div class="amount">$49 <small>starting at</small></div><ul><li>1-page animated website</li><li>Mobile-friendly design</li><li>WhatsApp order button</li><li>Live link — no domain needed</li><li>1 revision round</li></ul><a class="btn btn-ghost wa-link" href="https://wa.me/8801866339688?text=Hi%20WebNova!%20I%20want%20the%20Basic%20package%20(starting%20at%20%2449).%20Please%20share%20details." data-msg="Hi WebNova! I want the Basic package (starting at $49). Please share details."><span class="btn-label">Order Basic</span><span class="burst"><i></i><i></i><i></i><i></i><i></i><i></i></span></a></div>
+        <div class="price pop tilt spot reveal"><span class="pop-badge">Most Popular</span><h3>Standard</h3><div class="amount">$99 <small>starting at</small></div><ul><li>Up to 5 pages</li><li>Full animation + 3D motion effects</li><li>Work / product showcase</li><li>360°-style interactive section</li><li>2 revision rounds</li></ul><a class="btn btn-red wa-link" href="https://wa.me/8801866339688?text=Hi%20WebNova!%20I%20want%20the%20Standard%20package%20(starting%20at%20%2499).%20Please%20share%20details." data-msg="Hi WebNova! I want the Standard package (starting at $99). Please share details."><span class="btn-label">Order Standard</span><span class="burst"><i></i><i></i><i></i><i></i><i></i><i></i></span></a></div>
+        <div class="price tilt spot reveal"><h3>Premium</h3><div class="amount">$199 <small>starting at</small></div><ul><li>Up to 10 pages</li><li>Everything in Standard</li><li>Store / booking-style sections</li><li>Priority delivery</li><li>3 revision rounds + launch support</li></ul><a class="btn btn-ghost wa-link" href="https://wa.me/8801866339688?text=Hi%20WebNova!%20I%20want%20the%20Premium%20package%20(starting%20at%20%24199).%20Please%20share%20details." data-msg="Hi WebNova! I want the Premium package (starting at $199). Please share details."><span class="btn-label">Order Premium</span><span class="burst"><i></i><i></i><i></i><i></i><i></i><i></i></span></a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" style="padding-top:8px">
+    <div class="wrap">
+      <div class="sec-head reveal"><p class="kicker">Questions</p><h2>Before you order</h2></div>
+      <div class="faq reveal">
+        <details><summary>Do I need to buy a domain?</summary><p>No. Your site can go live on a free link that stays online 24/7. If you later want your own .com domain, we can connect it — the domain would be bought in your own name.</p></details>
+        <details><summary>How do customers order from me?</summary><p>Message on WhatsApp first. You see a preview of your site on a private link, and only after payment is the site handed over — as files, or deployed to your own account so you fully own it.</p></details>
+        <details><summary>Will it work well on phones?</summary><p>Yes — every site is designed mobile-first and tested at phone size. Animations use lightweight code, so pages stay fast on mobile Chrome.</p></details>
+        <details><summary>How long does it take?</summary><p>It depends on the package and how fast you send your content (name, photos, prices). The timeline is confirmed on WhatsApp before work starts.</p></details>
+        <details><summary>Can I update the site later?</summary><p>Yes. Small text and photo changes can be done anytime — just message on WhatsApp and we will update and re-publish your site.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" style="padding-top:8px">
+    <div class="wrap">
+      <div class="contact-card reveal">
+        <p class="kicker">Start Today</p>
+        <h2>Ready to get<br>your website?</h2>
+        <p>Tap the button, say hello on WhatsApp, and tell us what kind of website you want. We reply with details, price and timeline.</p>
+        <a class="btn btn-wa wa-link" href="https://wa.me/8801866339688?text=Hi%20WebNova!%20I%20want%20a%20website.%20Please%20share%20details." data-msg="Hi WebNova! I want a website. Please share details." style="font-size:16px;padding:16px 28px">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.2 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.4-.7-2.9-1.2-4.7-4.1-4.9-4.3-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.5c-.1.1-.3.3-.1.6.1.3.7 1.2 1.6 1.9 1.1.9 2 1.2 2.3 1.3.3.1.5.1.6-.1l1-1.2c.2-.3.4-.2.7-.1l2.1 1c.3.2.5.3.6.4 0 .1 0 .7-.2 1.2z"/></svg>
+          <span class="btn-label">Chat on WhatsApp</span><span class="burst"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+        </a>
+        <a class="phone-big" href="tel:+8801866339688">+880 1866-339688</a>
+        <small>Tap the number to call, or use WhatsApp above.</small>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot-in">
+    <span><strong style="color:#fff">WebNova</strong> — Websites that move.</span>
+    <span>Animated • Mobile-first • Live 24/7</span>
+    <a href="#top" style="padding:10px 4px">Back to top ↑</a>
+  </div>
+</footer>
+</div><!-- /#page-home -->
+
+<!-- ================= ANIMATIONS PAGE ================= -->
+<div id="page-anim">
+  <section class="anim-sec">
+    <div class="wrap">
+      <a class="btn btn-ghost btn-sm back-btn" href="#" data-goto="home">← Back to Home</a>
+      <div class="sec-head">
+        <p class="kicker">Animation Add-Ons</p>
+        <h2>Choose Your Animations</h2>
+        <p>Tap an animation to add it. The more you add, the higher the total — your price updates live. Every demo below is the real animation, playing live.</p>
+      </div>
+
+      <!-- ADD-ON PRICES: to change a price, edit that card's data-price AND the matching $ amount shown on the card. -->
+      <div class="anim-grid">
+        <article class="anim-card reveal" data-name="Hero Entrance Animation" data-price="3">
+          <div class="anim-demo d-hero" aria-hidden="true"><div><div class="dh-title">Big Sale<br><em>Starts Now</em></div><div class="dh-line"></div><span class="dh-btn">Shop Now</span></div></div>
+          <div class="anim-body"><h3>Hero Entrance Animation</h3><p>Your headline and buttons animate in the moment the page loads — a strong first impression.</p>
+          <div class="anim-foot"><span class="anim-price">+ $3<small>one-time add-on</small></span><button class="anim-select" type="button">Select</button></div></div>
+        </article>
+
+        <article class="anim-card reveal" data-name="Scroll Reveal Animations" data-price="3">
+          <div class="anim-demo d-reveal" aria-hidden="true"><div class="dr-row"><i></i><span style="width:58%"></span></div><div class="dr-row"><i></i><span style="width:44%"></span></div><div class="dr-row"><i></i><span style="width:66%"></span></div></div>
+          <div class="anim-body"><h3>Scroll Reveal Animations</h3><p>Sections fade and slide in smoothly as your visitors scroll down the page.</p>
+          <div class="anim-foot"><span class="anim-price">+ $3<small>one-time add-on</small></span><button class="anim-select" type="button">Select</button></div></div>
+        </article>
+
+        <article class="anim-card reveal" data-name="3D Tilt Cards" data-price="5">
+          <div class="anim-demo d-tilt" aria-hidden="true"><div class="dt-card"><b>Your Product</b><i></i><i></i></div></div>
+          <div class="anim-body"><h3>3D Tilt Cards</h3><p>Product and work cards tilt in 3D and glow under your customer's finger or mouse.</p>
+          <div class="anim-foot"><span class="anim-price">+ $5<small>one-time add-on</small></span><button class="anim-select" type="button">Select</button></div></div>
+        </article>
+
+        <article class="anim-card reveal" data-name="360° Viewer" data-price="9">
+          <div class="anim-demo d-360" aria-hidden="true"><div class="d3-box"><div class="d3-face d3-f">FRONT<br>Drag me ⟷</div><div class="d3-face d3-b">BACK</div></div></div>
+          <div class="anim-body"><h3>360° Viewer</h3><p>A drag-to-rotate 360° showcase so customers can spin your product or website around.</p>
+          <div class="anim-foot"><span class="anim-price">+ $9<small>one-time add-on</small></span><button class="anim-select" type="button">Select</button></div></div>
+        </article>
+
+        <article class="anim-card reveal" data-name="Live Build Demo" data-price="5">
+          <div class="anim-demo d-build" aria-hidden="true"><div class="db-line">&lt;h1&gt; Your Shop &lt;/h1&gt;</div><div class="db-line c2">theme: dark · bold · motion</div><div class="db-line c3">✓ publish — site is LIVE</div><span class="db-live">● LIVE</span></div>
+          <div class="anim-body"><h3>Live Build Demo</h3><p>Code types itself on screen while a mini version of a website builds live in front of visitors.</p>
+          <div class="anim-foot"><span class="anim-price">+ $5<small>one-time add-on</small></span><button class="anim-select" type="button">Select</button></div></div>
+        </article>
+
+        <article class="anim-card reveal" data-name="Before / After Slider" data-price="5">
+          <div class="anim-demo d-ba" aria-hidden="true"><div class="dba-base"><b>AFTER — <em>WebNova</em></b></div><div class="dba-top"><b>Before — plain</b><i style="width:70%"></i><i style="width:52%"></i></div><div class="dba-handle"></div></div>
+          <div class="anim-body"><h3>Before / After Slider</h3><p>A draggable handle that compares two designs side by side — perfect for showing your work.</p>
+          <div class="anim-foot"><span class="anim-price">+ $5<small>one-time add-on</small></span><button class="anim-select" type="button">Select</button></div></div>
+        </article>
+
+        <article class="anim-card reveal" data-name="Particle & Confetti Effects" data-price="3">
+          <div class="anim-demo d-parts" aria-hidden="true"><span class="dp-btn">Tap me!<i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+          <div class="anim-body"><h3>Particle &amp; Confetti Effects</h3><p>Playful bursts and floating particles explode on button clicks — visitors remember it.</p>
+          <div class="anim-foot"><span class="anim-price">+ $3<small>one-time add-on</small></span><button class="anim-select" type="button">Select</button></div></div>
+        </article>
+
+        <article class="anim-card reveal" data-name="3D Swinging Badge" data-price="5">
+          <div class="anim-demo d-badge" aria-hidden="true"><div class="swing mini-swing"><div class="mini-lanyard"></div><div class="mini-badge"><div class="mb-av">WN</div><b>Your Brand</b><span>WebNova Studio</span></div></div></div>
+          <div class="anim-body"><h3>3D Swinging Badge</h3><p>A swinging 3D ID badge with a waving ribbon in your hero — the signature WebNova look.</p>
+          <div class="anim-foot"><span class="anim-price">+ $5<small>one-time add-on</small></span><button class="anim-select" type="button">Select</button></div></div>
+        </article>
+      </div>
+
+      <p class="anim-note">Add-on prices are added on top of your chosen package (Basic $49 · Standard $99 · Premium $199). Your final quote is confirmed on WhatsApp before any work starts — no hidden charges.</p>
+      <div style="text-align:center;margin-top:18px"><a class="btn btn-ghost" href="#" data-goto="home">← Back to Home</a></div>
+    </div>
+  </section>
+</div>
+
+<!-- Sticky animation order bar -->
+<div id="animBar" role="region" aria-label="Your selected animations">
+  <div class="animbar-in">
+    <div class="animbar-txt"><b id="animCount">0 animations selected</b><span class="animbar-total">Add-on total: <em id="animTotal">$0</em></span></div>
+    <a class="btn btn-wa btn-sm wa-link" id="animOrder" href="https://wa.me/8801866339688?text=Hi%20WebNova!%20I%20want%20a%20website%20with%20animations.%20Please%20share%20details." data-msg="Hi WebNova! I want a website with animations. Please share details."><span class="btn-label">Order on WhatsApp</span><span class="burst"><i></i><i></i><i></i><i></i><i></i><i></i></span></a>
+  </div>
+</div>
+
+<a class="float-wa wa-link" id="floatWa" href="https://wa.me/8801866339688?text=Hi%20WebNova!%20I%20want%20a%20website.%20Please%20share%20details." data-msg="Hi WebNova! I want a website. Please share details." aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.2 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.4-.7-2.9-1.2-4.7-4.1-4.9-4.3-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.5c-.1.1-.3.3-.1.6.1.3.7 1.2 1.6 1.9 1.1.9 2 1.2 2.3 1.3.3.1.5.1.6-.1l1-1.2c.2-.3.4-.2.7-.1l2.1 1c.3.2.5.3.6.4 0 .1 0 .7-.2 1.2z"/></svg>
+</a>
+
+<!-- Work sample detail modal -->
+<div class="modal-overlay" id="sampleModal" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-x" id="modalClose" type="button" aria-label="Close details">✕</button>
+    <div class="mock modal-mock" id="modalMock"><div class="bar"><i></i><i></i><i></i></div><h4 id="modalHead"></h4><p id="modalMockP"></p><span class="chip" id="modalChip"></span></div>
+    <div class="modal-body">
+      <span class="tag" id="modalTag"></span>
+      <h3 id="modalTitle"></h3>
+      <p class="modal-desc" id="modalDesc"></p>
+      <p class="modal-price">Websites like this start at <b>$49</b></p>
+      <div class="modal-actions">
+        <a class="btn btn-wa wa-link" id="modalWa" href="https://wa.me/8801866339688" data-msg="Hi WebNova! I want a website. Please share details."><span class="btn-label">Get one like this</span><span class="burst"><i></i><i></i><i></i><i></i><i></i><i></i></span></a>
+        <button class="btn btn-ghost" id="modalBack" type="button">← Back</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var WA_NUM = "8801866339688";
+  var RM = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  // WhatsApp confetti burst + label morph, then open
+  var CONFETTI_COLORS = ["#25d366", "#ffffff", "#ff2e1f", "#ffd166", "#e10600"];
+  document.querySelectorAll(".wa-link").forEach(function(el){
+    el.addEventListener("click", function(e){
+      e.preventDefault();
+      if (el.classList.contains("bursting")) return;
+      el.classList.add("bursting");
+      var box = document.createElement("span");
+      box.className = "confetti-box";
+      el.appendChild(box);
+      for (var i = 0; i < 14; i++) {
+        var c = document.createElement("i");
+        c.className = "confetti";
+        var ang = (Math.PI * 2 * i / 14) + Math.random() * 0.5;
+        var dist = 46 + Math.random() * 44;
+        c.style.setProperty("--tx", (Math.cos(ang) * dist).toFixed(0) + "px");
+        c.style.setProperty("--ty", (Math.sin(ang) * dist - 14).toFixed(0) + "px");
+        c.style.setProperty("--rot", Math.round(Math.random() * 340 - 170) + "deg");
+        c.style.background = CONFETTI_COLORS[i % CONFETTI_COLORS.length];
+        box.appendChild(c);
+      }
+      requestAnimationFrame(function(){
+        box.querySelectorAll(".confetti").forEach(function(c){ c.classList.add("fly"); });
+      });
+      var label = el.querySelector(".btn-label");
+      var oldLabel = label ? label.textContent : null;
+      if (label) label.textContent = "✓ Opening WhatsApp…";
+      var msg = el.getAttribute("data-msg") || "Hi WebNova! I want a website. Please share details.";
+      var url = "https://wa.me/" + WA_NUM + "?text=" + encodeURIComponent(msg);
+      setTimeout(function(){
+        window.open(url, "_blank", "noopener");
+        el.classList.remove("bursting");
+        if (label) label.textContent = oldLabel;
+        setTimeout(function(){ box.remove(); }, 450);
+      }, 600);
+    });
+  });
+
+  // Staggered reveals inside grids
+  [".work-grid", ".steps", ".price-grid", ".stats-grid", ".demo-grid", ".anim-grid"].forEach(function(sel){
+    document.querySelectorAll(sel + " > .reveal").forEach(function(el, i){
+      el.style.setProperty("--d", (i * 85) + "ms");
+    });
+  });
+
+  // Scroll reveal
+  var io = ("IntersectionObserver" in window) ? new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); } });
+  }, {threshold: .12}) : null;
+  document.querySelectorAll(".reveal").forEach(function(el){ if(io) io.observe(el); else el.classList.add("in"); });
+
+  // Duplicate marquee content for seamless loop
+  var track = document.getElementById("marqueeTrack");
+  if (track) track.innerHTML += track.innerHTML;
+
+  // Spotlight glow + gentle 3D tilt (touch + mouse)
+  document.querySelectorAll(".spot").forEach(function(card){
+    var doTilt = card.classList.contains("tilt");
+    function move(e){
+      var r = card.getBoundingClientRect();
+      if (!r.width || !r.height) return;
+      var px = (e.clientX - r.left) / r.width;
+      var py = (e.clientY - r.top) / r.height;
+      card.style.setProperty("--mx", (px * 100).toFixed(1) + "%");
+      card.style.setProperty("--my", (py * 100).toFixed(1) + "%");
+      card.classList.add("spot-on");
+      if (doTilt) card.style.transform = "perspective(700px) rotateX(" + ((py - .5) * -9).toFixed(1) + "deg) rotateY(" + ((px - .5) * 9).toFixed(1) + "deg)";
+    }
+    function reset(){
+      card.classList.remove("spot-on");
+      if (doTilt) card.style.transform = "";
+    }
+    card.addEventListener("pointermove", move);
+    card.addEventListener("pointerdown", move);
+    card.addEventListener("pointerleave", reset);
+    card.addEventListener("pointercancel", reset);
+    card.addEventListener("pointerup", function(){ setTimeout(reset, 300); });
+  });
+
+  /* ---------- 360 viewer ---------- */
+  var device = document.getElementById("device");
+  var scene = document.getElementById("scene");
+  var dots = document.querySelectorAll("#dots i");
+  var faces = device.querySelectorAll(".face");
+  var W = 280, D = 280; // width / depth for a square prism
+  faces.forEach(function(f, i){
+    var a = i * 90;
+    f.style.transform = "rotateY(" + a + "deg) translateZ(" + (W/2) + "px)";
+  });
+  var angle = 0, vel = 0, dragging = false, lastX = 0, lastT = 0, idleSince = Date.now(), inView = true, lastFrame = 0;
+  var tapPill = null, tapX = 0, tapY = 0;
+  function render(now){
+    requestAnimationFrame(render);
+    if (now - lastFrame < 33) return; // ~30fps cap
+    lastFrame = now;
+    if (!inView || document.hidden) return;
+    if (!dragging) {
+      angle += vel;
+      vel *= 0.94; // inertia decay
+      if (Math.abs(vel) < 0.05 && Date.now() - idleSince > 2500) angle += 0.35; // slow auto-rotate
+    }
+    device.style.transform = "rotateX(-6deg) rotateY(" + angle.toFixed(1) + "deg)";
+    var idx = ((Math.round(-angle / 90) % 4) + 4) % 4;
+    dots.forEach(function(d, i){ d.classList.toggle("on", i === idx); });
+  }
+  requestAnimationFrame(render);
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function(en){ inView = en[0].isIntersecting; }, {threshold:.15}).observe(scene);
+  }
+  scene.addEventListener("pointerdown", function(e){ dragging = true; lastX = e.clientX; lastT = Date.now(); vel = 0; tapX = e.clientX; tapY = e.clientY; tapPill = (e.target && e.target.closest) ? e.target.closest(".mini-btn") : null; scene.setPointerCapture(e.pointerId); });
+  scene.addEventListener("pointermove", function(e){
+    if (!dragging) return;
+    var dx = e.clientX - lastX, now = Date.now(), dt = Math.max(1, now - lastT);
+    angle += dx * 0.45; vel = (dx * 0.45) / dt * 16;
+    lastX = e.clientX; lastT = now; idleSince = now;
+  });
+  function endDrag(e){
+    if(dragging){ dragging = false; idleSince = Date.now(); }
+    // A tap (not a drag) that started on a face pill fires that pill — but only
+    // while its face is turned toward the viewer, so side/back pills stay inert.
+    if (tapPill && e && typeof e.clientX === "number" && Math.hypot(e.clientX - tapX, e.clientY - tapY) < 10) {
+      var faceEl = tapPill.closest(".face");
+      var fi = faceEl ? Array.prototype.indexOf.call(faces, faceEl) : -1;
+      if (fi >= 0) {
+        var w = (((fi * 90 + angle) % 360) + 360) % 360;
+        if (w > 180) w = 360 - w;
+        if (w <= 70) tapPill.click();
+      }
+    }
+    tapPill = null;
+  }
+  scene.addEventListener("pointerup", endDrag);
+  scene.addEventListener("pointercancel", endDrag);
+
+  /* ---------- Scroll progress bar + hero orb parallax ---------- */
+  var prog = document.getElementById("progress");
+  var orbs = document.querySelectorAll(".orb");
+  var scrollTick = false;
+  function onScroll(){
+    scrollTick = false;
+    var st = window.scrollY || document.documentElement.scrollTop || 0;
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    if (prog) prog.style.transform = "scaleX(" + (max > 0 ? Math.min(1, st / max) : 0) + ")";
+    if (!RM && st < window.innerHeight * 1.3) {
+      orbs.forEach(function(o){
+        var f = parseFloat(o.getAttribute("data-depth") || "0.12");
+        o.style.transform = "translateY(" + (st * f).toFixed(1) + "px)";
+      });
+    }
+  }
+  window.addEventListener("scroll", function(){
+    if (!scrollTick) { scrollTick = true; requestAnimationFrame(onScroll); }
+  }, { passive: true });
+  onScroll();
+
+  /* ---------- Live build demo ---------- */
+  var codeBody = document.getElementById("codeBody");
+  if (codeBody) {
+    var pvBody = document.getElementById("pvBody");
+    var pvLive = document.getElementById("pvLive");
+    var demoStatus = document.getElementById("demoStatus");
+    var fxEls = {};
+    pvBody.querySelectorAll("[data-fx]").forEach(function(el){ fxEls[el.getAttribute("data-fx")] = el; });
+    var LINES = [
+      { t: "<header> Your Shop · Menu · Contact </header>", c: "tk", fx: "header", s: "Adding the header…" },
+      { t: "<h1> Fresh Styles, Every Week </h1>", c: "tk", fx: "hero", s: "Writing the big headline…" },
+      { t: "<p> Delivered all over Bangladesh </p>", c: "tk", fx: "sub", s: "Adding the tagline…" },
+      { t: "<button> Order on WhatsApp </button>", c: "tk", fx: "btn", s: "Adding the order button…" },
+      { t: "theme: dark · bold red · motion", c: "cs", fx: "theme", s: "Applying colours & motion…" },
+      { t: "<section> Products + photos </section>", c: "tk", fx: "cards", s: "Adding your products…" },
+      { t: "✓ publish — site is LIVE", c: "ok", fx: "live", s: "Published — your site is live!" }
+    ];
+    var cursor = document.createElement("span");
+    cursor.className = "cursor";
+    var demoVisible = false, demoStarted = false;
+    function later(fn, ms){
+      setTimeout(function(){
+        if (!demoVisible || document.hidden) { later(fn, 350); return; }
+        fn();
+      }, ms);
+    }
+    function applyFx(fx){
+      if (fx === "theme") pvBody.classList.add("themed");
+      else if (fx === "live") pvLive.classList.add("show");
+      else if (fxEls[fx]) fxEls[fx].classList.add("show");
+    }
+    function resetDemo(){
+      codeBody.innerHTML = "";
+      pvBody.classList.remove("themed");
+      pvLive.classList.remove("show");
+      Object.keys(fxEls).forEach(function(k){ fxEls[k].classList.remove("show"); });
+    }
+    function typeLine(i){
+      if (i >= LINES.length) {
+        if (RM) { demoStatus.textContent = "Your finished site — live and ready to sell."; return; }
+        demoStatus.innerHTML = "<b>Done!</b> Watch it again…";
+        later(function(){ resetDemo(); typeLine(0); }, 2600);
+        return;
+      }
+      var L = LINES[i];
+      demoStatus.textContent = L.s;
+      var line = document.createElement("div");
+      line.className = "code-line " + L.c;
+      var txt = document.createElement("span");
+      line.appendChild(txt);
+      line.appendChild(cursor);
+      codeBody.appendChild(line);
+      if (RM) {
+        txt.textContent = L.t;
+        applyFx(L.fx);
+        later(function(){ typeLine(i + 1); }, 60);
+        return;
+      }
+      var ci = 0;
+      (function typeChar(){
+        ci++;
+        txt.textContent = L.t.slice(0, ci);
+        if (ci < L.t.length) later(typeChar, 24);
+        else { applyFx(L.fx); later(function(){ typeLine(i + 1); }, 340); }
+      })();
+    }
+    var buildSec = document.getElementById("build");
+    if ("IntersectionObserver" in window && buildSec) {
+      new IntersectionObserver(function(en){
+        demoVisible = en[0].isIntersecting;
+        if (demoVisible && !demoStarted) { demoStarted = true; typeLine(0); }
+      }, { threshold: .2 }).observe(buildSec);
+    } else { demoVisible = true; demoStarted = true; typeLine(0); }
+  }
+
+  /* ---------- Before / After slider ---------- */
+  var ba = document.getElementById("ba");
+  if (ba) {
+    var baDrag = false, baTouched = false;
+    function baSet(x){
+      var r = ba.getBoundingClientRect();
+      var p = (x - r.left) / r.width * 100;
+      p = Math.max(4, Math.min(96, p));
+      ba.style.setProperty("--pos", p.toFixed(1) + "%");
+    }
+    ba.addEventListener("pointerdown", function(e){
+      baDrag = true; baTouched = true;
+      ba.classList.add("touched");
+      try { ba.setPointerCapture(e.pointerId); } catch (err) {}
+      baSet(e.clientX);
+    });
+    ba.addEventListener("pointermove", function(e){ if (baDrag) baSet(e.clientX); });
+    ["pointerup", "pointercancel"].forEach(function(ev){
+      ba.addEventListener(ev, function(){ baDrag = false; });
+    });
+    if ("IntersectionObserver" in window && !RM) {
+      var baIo = new IntersectionObserver(function(en){
+        if (!en[0].isIntersecting) return;
+        baIo.disconnect();
+        var t0 = null;
+        function nudge(ts){
+          if (baTouched || baDrag) return;
+          if (!t0) t0 = ts;
+          var p = Math.min(1, (ts - t0) / 1400);
+          var v = 50 + Math.sin(p * Math.PI) * 16;
+          ba.style.setProperty("--pos", v.toFixed(1) + "%");
+          if (p < 1) requestAnimationFrame(nudge);
+        }
+        requestAnimationFrame(nudge);
+      }, { threshold: .35 });
+      baIo.observe(ba);
+    }
+  }
+
+  /* ---------- Animations picker page ---------- */
+  function showPage(which){
+    document.body.classList.toggle("on-anim", which === "anim");
+    window.scrollTo(0, 0);
+    onScroll();
+  }
+  document.querySelectorAll("[data-goto]").forEach(function(el){
+    el.addEventListener("click", function(e){
+      e.preventDefault();
+      showPage(el.getAttribute("data-goto"));
+    });
+  });
+
+  var animOrder = document.getElementById("animOrder");
+  var animCount = document.getElementById("animCount");
+  var animTotal = document.getElementById("animTotal");
+  var picked = {}; // name -> price
+  function fmtUSD(n){ return "$" + n.toLocaleString("en-US"); }
+  function updateAnimBar(){
+    var names = Object.keys(picked);
+    var total = names.reduce(function(s, k){ return s + picked[k]; }, 0);
+    if (animCount) animCount.textContent = names.length + (names.length === 1 ? " animation" : " animations") + " selected";
+    if (animTotal) animTotal.textContent = fmtUSD(total);
+    var msg;
+    if (names.length) {
+      var lines = names.map(function(k, i){ return (i + 1) + ". " + k + " — " + fmtUSD(picked[k]); });
+      msg = "Hi WebNova! I want to add these animations to my website:\n" + lines.join("\n") +
+            "\nAdd-on total: " + fmtUSD(total) + "\n(This add-on total will be added to my chosen package price.) Please share details.";
+    } else {
+      msg = "Hi WebNova! I want a website with animations. Please share details.";
+    }
+    if (animOrder) {
+      animOrder.setAttribute("data-msg", msg);
+      animOrder.setAttribute("href", "https://wa.me/" + WA_NUM + "?text=" + encodeURIComponent(msg));
+    }
+  }
+  document.querySelectorAll(".anim-card").forEach(function(card){
+    var btn = card.querySelector(".anim-select");
+    var name = card.getAttribute("data-name");
+    var price = parseInt(card.getAttribute("data-price"), 10) || 0;
+    btn.addEventListener("click", function(){
+      if (card.classList.contains("selected")) {
+        card.classList.remove("selected");
+        delete picked[name];
+        btn.textContent = "Select";
+      } else {
+        card.classList.add("selected");
+        picked[name] = price;
+        btn.textContent = "✓ Selected";
+      }
+      updateAnimBar();
+    });
+  });
+  updateAnimBar();
+
+  // Pause card demos when off-screen; pause everything when the tab is hidden
+  if ("IntersectionObserver" in window) {
+    var demoIo = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ en.target.classList.toggle("demo-off", !en.isIntersecting); });
+    }, { threshold: .05 });
+    document.querySelectorAll(".anim-card").forEach(function(c){ demoIo.observe(c); });
+  }
+  document.addEventListener("visibilitychange", function(){
+    document.body.classList.toggle("tab-hidden", document.hidden);
+  });
+
+  /* ---------- Work sample modal + 360 pill scroll links ---------- */
+  var SAMPLES = [
+    { cls: "m1", tag: "Restaurant", title: "Spice Route — Restaurant", head: "Taste the Heat", mockP: "Menu, offers and one-tap WhatsApp ordering.", chip: "Order Online",
+      desc: "A bold restaurant site with full menu pages, daily offers and a table-booking button — so customers order in one tap instead of just browsing.",
+      msg: "Hi WebNova! I want a website like the Spice Route restaurant sample. Please share details." },
+    { cls: "m2", tag: "Fashion", title: "Vogue Lane — Fashion Store", head: "New Drop Friday", mockP: "Lookbook, product grid and checkout-ready layout.", chip: "Shop Now",
+      desc: "A fashion storefront with a lookbook, a clean product grid and a checkout-ready layout, wrapped in bold animated banners that make every drop feel big.",
+      msg: "Hi WebNova! I want a website like the Vogue Lane fashion store sample. Please share details." },
+    { cls: "m3", tag: "Portfolio", title: "Creator Portfolio", head: "Work That Speaks", mockP: "Gallery, services and a big contact card.", chip: "Hire Me",
+      desc: "A portfolio for editors, designers and freelancers — gallery, services and a big contact card that turns visitors into paying clients.",
+      msg: "Hi WebNova! I want a website like the Creator Portfolio sample. Please share details." },
+    { cls: "m4", tag: "Travel", title: "Wander BD — Travel", head: "Go Somewhere New", mockP: "Tour packages, photo stories and booking form.", chip: "Book a Trip",
+      desc: "A travel site with tour packages, photo stories and an easy enquiry flow — so trips get booked, not just browsed.",
+      msg: "Hi WebNova! I want a website like the Wander BD travel sample. Please share details." }
+  ];
+  var modal = document.getElementById("sampleModal");
+  if (modal) {
+    var mMock = document.getElementById("modalMock"), mHead = document.getElementById("modalHead"),
+        mMockP = document.getElementById("modalMockP"), mChip = document.getElementById("modalChip"),
+        mTag = document.getElementById("modalTag"), mTitle = document.getElementById("modalTitle"),
+        mDesc = document.getElementById("modalDesc"), mWa = document.getElementById("modalWa");
+    function openSample(s){
+      mMock.className = "mock modal-mock " + s.cls;
+      mHead.textContent = s.head; mMockP.textContent = s.mockP; mChip.textContent = s.chip;
+      mTag.textContent = s.tag; mTitle.textContent = s.title; mDesc.textContent = s.desc;
+      mWa.setAttribute("data-msg", s.msg);
+      mWa.setAttribute("href", "https://wa.me/" + WA_NUM + "?text=" + encodeURIComponent(s.msg));
+      modal.classList.add("open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("modal-open");
+    }
+    function closeSample(){
+      modal.classList.remove("open");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("modal-open");
+    }
+    document.querySelectorAll(".work-card").forEach(function(card, i){
+      card.setAttribute("role", "button");
+      card.setAttribute("tabindex", "0");
+      card.addEventListener("click", function(){ if (SAMPLES[i]) openSample(SAMPLES[i]); });
+      card.addEventListener("keydown", function(e){
+        if ((e.key === "Enter" || e.key === " ") && SAMPLES[i]) { e.preventDefault(); openSample(SAMPLES[i]); }
+      });
+    });
+    document.getElementById("modalClose").addEventListener("click", closeSample);
+    document.getElementById("modalBack").addEventListener("click", closeSample);
+    modal.addEventListener("click", function(e){ if (e.target === modal) closeSample(); });
+    document.addEventListener("keydown", function(e){ if (e.key === "Escape" && modal.classList.contains("open")) closeSample(); });
+  }
+  // 360° face pills that scroll: "View Products" -> Work, "Our Story" -> Process
+  document.querySelectorAll("[data-goto-section]").forEach(function(p){
+    p.addEventListener("click", function(){
+      var t = document.getElementById(p.getAttribute("data-goto-section"));
+      if (t) t.scrollIntoView({ behavior: RM ? "auto" : "smooth", block: "start" });
+    });
+  });
+
+  /* ---------- Count-up stats ---------- */
+  var counted = false;
+  function runCounts(){
+    if (counted) return;
+    counted = true;
+    document.querySelectorAll(".count").forEach(function(el){
+      var target = parseInt(el.getAttribute("data-count"), 10) || 0;
+      if (RM) { el.textContent = target; return; }
+      var t0 = null;
+      function step(ts){
+        if (!t0) t0 = ts;
+        var p = Math.min(1, (ts - t0) / 1300);
+        var e = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(target * e);
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
+  }
+  var statsGrid = document.querySelector(".stats-grid");
+  if (statsGrid) {
+    if ("IntersectionObserver" in window) {
+      var stIo = new IntersectionObserver(function(en){
+        if (en[0].isIntersecting) { runCounts(); stIo.disconnect(); }
+      }, { threshold: .3 });
+      stIo.observe(statsGrid);
+    } else runCounts();
+  }
+})();
+</script>
+</body>
+</html>
